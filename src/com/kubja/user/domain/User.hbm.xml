@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.kubja.user.domain.User" table="users">
+    <id name="login" column="login">
+        <generator class="assigned"/>
+    </id>
+    <property name="password"/>
+    <property name="firstname"/>
+    <property name="lastname"/>
+    <property name="email"/>
+    <property name="dob" type="timestamp"/>
+    <component name="address">
+    	<property name="street"/>
+    	<property name="city"/>
+    	<property name="state"/>
+    	<property name="country"/>
+    	<property name="zipcode"/>
+    </component>
+</class>
+
+</hibernate-mapping>

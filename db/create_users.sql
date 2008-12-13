@@ -1,0 +1,1 @@
+create table users (login varchar(255) not null, password varchar(255), firstname varchar(255), lastname varchar(255), email varchar(255), dob timestamp, street varchar(255), city varchar(255), state varchar(255), country varchar(255), zipcode varchar(255), primary key (login));
