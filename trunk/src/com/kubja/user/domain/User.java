@@ -3,7 +3,11 @@ package com.kubja.user.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.GrantedAuthorityImpl;
+import org.springframework.security.userdetails.UserDetails;
+
+public class User implements Serializable, UserDetails {
 	private String login;
 	private String password;
 	private String firstname;
@@ -11,6 +15,13 @@ public class User implements Serializable {
 	private String email;
 	private Date dob;
 	private Address address = new Address();
+	
+	private boolean enabled;
+	private String authStr;
+	
+	//authorities is provided for local caching of processed result
+	private GrantedAuthority[] authorities;
+
 	public String getLogin() {
 		return login;
 	}
@@ -52,6 +63,63 @@ public class User implements Serializable {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	@Override
+	public GrantedAuthority[] getAuthorities() {
+		if(authStr == null){
+			return null;
+		}
+		if(authorities != null){
+			return authorities;
+		}
+		String[] authArr = authStr.split(",");
+		GrantedAuthority[] auths = new GrantedAuthority[authArr.length];
+		for(int i=0; i< authArr.length; i++){
+			auths[i] = new GrantedAuthorityImpl(authArr[i]);
+		}
+		authorities = auths;
+		return auths;
+	}
+	@Override
+	public String getUsername() {
+		return login;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public String getAuthStr() {
+		return authStr;
+	}
+	public void setAuthStr(String authStr) {
+		this.authStr = authStr;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public void setAuthorities(GrantedAuthority[] authorityObjs) {
+		authorities = authorityObjs;
+		StringBuilder auths = new StringBuilder();
+		for(GrantedAuthority a: authorityObjs){
+			auths.append(a.getAuthority() + ",");
+		}
+		if(auths.length() > 0){
+			auths.deleteCharAt(auths.length() - 1);
+		}
+		authStr = auths.toString();
+
 	}
 	
 }
