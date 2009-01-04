@@ -175,3 +175,11 @@ td.rightAlign{
 	text-align: right;
 }
 
+div.userLogin {
+	float: right;
+	color: white;
+}
+
+div.userLogin a{
+	color: white;
+}

@@ -18,6 +18,16 @@
         <property name="userManager" ref="userManager"/>
 	</bean>
 	
+	<bean name="/updateuser.htm" class="com.kubja.user.web.AddUserController">
+		<property name="commandName" value="user"/>
+		 <property name="validator">
+            <bean class="com.kubja.user.service.UserValidator"/>
+        </property>
+		<property name="formView" value="adduser"/>
+        <property name="successView" value="userslist.htm"/>
+        <property name="userManager" ref="userManager"/>
+	</bean>
+	
 	<bean name="/userslist.htm" class="com.kubja.user.web.UsersListController">
 		<property name="userManager" ref="userManager"/>
 	</bean>	
@@ -26,6 +36,8 @@
 		<property name="userManager" ref="userManager"/>
 	</bean>	
 
+	<bean name="/login.htm" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

@@ -12,6 +12,9 @@
     <property name="lastname"/>
     <property name="email"/>
     <property name="dob" type="timestamp"/>
+    <property name="enabled" />
+	<property name="authStr" />
+    
     <component name="address">
     	<property name="street"/>
     	<property name="city"/>
