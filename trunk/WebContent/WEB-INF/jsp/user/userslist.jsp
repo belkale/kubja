@@ -17,7 +17,7 @@
 		<c:url value="/user/viewuser.htm"><c:param name="id" value="${u.login}"/></c:url>
 	</c:set>
 	<c:set var="updateUrl">
-		<c:url value="/user/adduser.htm"><c:param name="id" value="${u.login}"/></c:url>
+		<c:url value="/user/updateuser.htm"><c:param name="id" value="${u.login}"/></c:url>
 	</c:set>
 
 	<c:if test="${status.index%2 == 0}">
@@ -30,7 +30,12 @@
 		<td>${u.firstname}</td>
 		<td>${u.lastname}</td>
 		<td>${u.email }</td>
-		<td><a href='${updateUrl}'>Update</a></td>
+		<c:if test="${u.login eq user}">
+			<td><a href='${updateUrl}'>Update</a></td>
+		</c:if>
+		<c:if test="${u.login ne user}">
+			<td>&nbsp;</td>
+		</c:if>
 	</tr>
 	
 </c:forEach>
