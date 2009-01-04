@@ -5,10 +5,12 @@
 </head>
 <body>
 <div id="header">
+<div class="userLogin">
+	Hello <security:authentication property="principal.username"/>! | <a href="<c:url value='/j_spring_security_logout'/>">Logout</a></li>
+</div>
 <h1>Kubja</h1>
 <h2>A Sample Application Using Spring and Hibernate</h2>
 </div>
-
 <div id="menu">
 	<ul>
 
